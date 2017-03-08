@@ -73,6 +73,7 @@ public class LoginServiceResource {
                    if(cursor!=null)
                    {
                        System.out.println("hai");
+                       //System.out.println("Ajay added here");
                    }
         while (cursor.hasNext()) {
             System.out.println("Entered Loop");
