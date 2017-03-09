@@ -49,8 +49,8 @@ public class LoginServiceResource {
      */
     
     
-     @GET
-  @Produces(MediaType.TEXT_PLAIN)
+     @POST
+     @Produces(MediaType.TEXT_PLAIN)
 	public Response getUsers(@Context UriInfo info) {
 		String username = info.getQueryParameters().getFirst("username");
 		String password = info.getQueryParameters().getFirst("password");
@@ -60,58 +60,32 @@ public class LoginServiceResource {
 			 mongoClient = new MongoClient();
          // Now connect to your databases
          DB db = mongoClient.getDB( "SSKDatabase" );
-         System.out.println("Connect to database successfully");
          DBCollection coll = db.getCollection("UserCollection");
-         System.out.println("Collection mycol selected successfully");
-	 BasicDBObject andQuery = new BasicDBObject();
-        List<BasicDBObject> obj = new ArrayList<BasicDBObject>();
-        obj.add(new BasicDBObject("_id", username));
-        obj.add(new BasicDBObject("password", password));
-        andQuery.put("$and", obj);
-        System.out.println(andQuery.toString());
-        DBCursor cursor = coll.find(andQuery);
-                   if(cursor!=null)
-                   {
-                       System.out.println("hai");
-                       //System.out.println("Ajay added here");
-                   }
+         BasicDBObject andQuery = new BasicDBObject();
+         List<BasicDBObject> obj = new ArrayList<BasicDBObject>();
+         obj.add(new BasicDBObject("_id", username));
+         obj.add(new BasicDBObject("password", password));
+         andQuery.put("$and", obj);
+         //System.out.println(andQuery.toString());
+         DBCursor cursor = coll.find(andQuery);
+                   
         while (cursor.hasNext()) {
-            System.out.println("Entered Loop");
-            finalOutput+=cursor.next();
+             finalOutput+=cursor.next();
         }
-			
 		} catch (UnknownHostException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
-		
-if(finalOutput.equals("HELLO"))
+			
+    if(finalOutput.equals("HELLO"))
 {
-    System.out.println("abshah");
+   
     return Response.status(200).entity("failure").build(); 
 }
 else
 {
      return Response.status(200).entity("sucess").build();
 }
-	 
 		   
-
 	}
-    
-   
-
-    /**
-     * PUT method for updating or creating an instance of LoginServiceResource
-     * @param content representation for the resource
-     * @return an HTTP response with content of the updated or created resource.
-     */
-    @PUT
-    @Consumes("text/plain")
-    public void putText(String content) {
-    }
 }
-
-
-

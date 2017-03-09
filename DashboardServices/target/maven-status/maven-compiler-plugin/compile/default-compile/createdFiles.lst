@@ -1,2 +1,3 @@
 DashboardServices\ApplicationConfig.class
+DashboardServices\FetchProject.class
 DashboardServices\LoginServiceResource.class
