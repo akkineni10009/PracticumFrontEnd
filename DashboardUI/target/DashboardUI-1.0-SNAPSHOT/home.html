@@ -1,0 +1,126 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>SSK HOME</title>
+<style>
+html, body
+{
+    height:    100%;
+    width:     100%;
+    position: fixed;
+}
+tab1
+{
+	padding-left: 4em;
+}
+#wide {
+	flex: 1;
+	/* Grow to rest of container */
+	/* Just so it's visible */
+}
+#iframe {
+    display: block;
+    width: 100%;
+  height: 80%;
+    padding-top: 20px; /* and this */
+    box-sizing: border-box;
+		overflow: scroll;
+    
+    border: 0;
+}
+</style>
+
+    <script src="http://localhost:8080/DashboardUI/js/jquery-1.9.1.min.js"></script>
+     <script src="js/homeJs.js"></script>
+    <script> 
+function roled()
+{
+document.getElementById("role").setAttribute('value','Architect');
+}
+</script>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<!--[if lte IE 8]><script src="assets/js/ie/html5shiv.js"></script><![endif]-->
+		<link rel="stylesheet" href="css/main.css" />
+		<!--[if lte IE 9]><link rel="stylesheet" href="assets/css/ie9.css" /><![endif]-->
+		<!--[if lte IE 8]><link rel="stylesheet" href="assets/css/ie8.css" /><![endif]-->
+	</head>
+	<body id="myimageid">
+		<!-- Wrapper -->
+			<div id="wrapper">
+				<!-- Main -->
+					<div id="main">
+						<div class="inner">
+							<!-- Header -->
+
+								<header id="header">
+									<form >
+										<center>SSK Private Limited</center>
+										<br>
+										Choose your project:
+										<select name="projects" width="50px" id="projects">
+										    <!--onEntry function will populate the values-->
+										</select>
+										<button type="button" id="selectproject">Select project</button>
+										&nbsp;&nbsp;&nbsp;&nbsp;
+										Choose your role:
+										<select name="roles" width="50px" id="roles">
+										    <!--onSelectProject function will populate the values-->
+										</select>
+										<button type="button"   id="selectrole">Select role</button>
+									</form>
+								</header>
+								<div id="wide" >
+						<center>		<br>	<figure>
+		  <img src="images/1.png"
+		    width="20%" height="20%"
+		    alt="User Image">
+		  <figcaption>
+                      <span id="empid"></span><br>
+				<a href="http://localhost:8080/DashboardUI/Login.html">(log out)</a>
+			</figcaption>
+		</figure>
+	</center>
+								</div>
+							<!-- Banner -->
+	</div>
+
+
+<iframe id="iframe"  src="basic.html" name="iframe_a"></iframe>
+
+
+			</div>
+			<!-- Sidebar -->
+					<div id="sidebar">
+						<div class="inner">
+							<!-- Menu -->
+								<nav id="menu">
+									<header class="major">
+										<h2>Menu</h2>
+									</header>
+									<ul>
+										<li><a href="basic.html" target="iframe_a" class="opener">Homepage</a></li>
+										<li><a href="linkinstances.html" target="iframe_a" class="opener">Create Instance</a></li>
+										<li><a href="elements.html" target="iframe_a" class="opener">View Instances</a></li>
+										<li><a href="linkinstances.html" target="iframe_a">Link Instances</a></li>
+										<li><a href="#" target="iframe_a">View Linkages</a></li>
+										<li><a href="#" target="iframe_a">View Traceability</a></li>
+										<li><a href="#" target="iframe_a">Group Lead</a></li>
+									</ul>
+								</nav>
+							<!-- Footer -->
+								<footer id="footer">
+									<p class="copyright">All rights reserved by SSK private Limited</p>
+								</footer>
+						</div>
+					</div>
+			</div>
+		<!-- Scripts -->
+			<script src="js/jquery.min.js"></script>
+			<script src="js/skel.min.js"></script>
+			<script src="js/util.js"></script>
+			<!--[if lte IE 8]><script src="assets/js/ie/respond.min.js"></script><![endif]-->
+			<script src="js/main.js"></script>
+
+	</body>
+</html>
