@@ -40,10 +40,11 @@ $( document ).ready(function() {
     });
     $(document).ready(function(){
     $("#selectproject").click(function(){
-  var projectname=document.getElementById("projects").value;   
+     
+  var projectname=document.getElementById("projects").value;
+ 
   try{
-   var empid=localStorage.getItem("userId");
-   localstorage.setItem("projectname",projectname);
+   var empid=localStorage.getItem("userId");   
 }
 catch(e)
 {
@@ -52,11 +53,14 @@ catch(e)
     console.log("Local storage is full");
   }
   else {
+      
     console.log("Error in saving the data");
   }
 }      
+
         $.post("http://localhost:8080/DashboardServices/webresources/fetchrole?userId="+empid+"&projectname="+projectname,
         function(data,status){   
+            
             var obj = JSON.parse(data);
         var roles=obj._id.toString();
 	var splitRoles=roles.split(",");

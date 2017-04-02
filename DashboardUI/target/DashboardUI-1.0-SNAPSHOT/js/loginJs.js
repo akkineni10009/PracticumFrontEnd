@@ -41,7 +41,7 @@ catch(e)
             }
             else
             {
-                alert("login status"+data);
+                alert("login status     "+data);
             }
         });
     });
