@@ -94,13 +94,15 @@ MongoClient mongoClient;
         DBObject group=new BasicDBObject("$group",new BasicDBObject("_id","$_id")
                 .append("projects", new BasicDBObject("$push","$projects"))
                 .append("productObjects", new BasicDBObject("$push","$productObjects")));
-        DBObject project=new BasicDBObject("$project",new BasicDBObject("productObjects.projectName",1)
-                );
-        DBObject group2=new BasicDBObject("$group",new BasicDBObject("_id","$productObjects.projectName")
-                );
+      DBObject group2=new BasicDBObject("$group",new BasicDBObject("_id","$productObjects.projectName"));
+               
+    
+        
+
 
          //System.out.println("Collection mycol selected successfully");
-        AggregationOutput output = coll.aggregate(match,unwind,lookup,unwind2,group,project,group2);
+         
+        AggregationOutput output = coll.aggregate(match,unwind,lookup,unwind2,group,group2);
 
 for (DBObject result : output.results()) {
  System.out.println(result);
