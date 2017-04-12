@@ -25,10 +25,10 @@ import javax.ws.rs.core.Response;
 /**
  * REST Web Service
  *
- * @author AKKINENI
+ * @author Akkineni
  */
-@Path("fetchrole")
-public class Fetchrole {
+@Path("fetchinstances")
+public class FetchInstances {
 
     @Context
     private UriInfo context;
@@ -36,14 +36,14 @@ public class Fetchrole {
     /**
      * Creates a new instance of Fetchrole
      */
-    public Fetchrole() {
+    public FetchInstances() {
     }
 
     /**
      * Retrieves representation of an instance of DashboardServices.Fetchrole
      * @return an instance of java.lang.String
      */
-    @GET
+    @POST
     @Produces(MediaType.APPLICATION_JSON)
     public String getJson() {
         //TODO return proper representation object
@@ -51,11 +51,12 @@ public class Fetchrole {
     }
 
     
-     @POST
+     @GET
      @Produces(MediaType.TEXT_PLAIN)
 	public Response getRole(@Context UriInfo info) {
-         String userId = info.getQueryParameters().getFirst("userId");
-         String projectname = info.getQueryParameters().getFirst("projectname");
+         String projectId = info.getQueryParameters().getFirst("projectId");
+         String entityName = info.getQueryParameters().getFirst("entityName");
+         System.out.println("projectId"+projectId);
          String finalOutput="";
          try {
          MongoClient mongoClient;
@@ -64,20 +65,24 @@ public class Fetchrole {
            // Now connect to your databases
           DB db = mongoClient.getDB( "SSKDatabase" );
           //System.out.println("Connect to database successfully");
-          DBCollection coll = db.getCollection("ProjectCollection");
-          DBObject match = new BasicDBObject("$match", new BasicDBObject("projectName", projectname));
-          DBObject lookup=new BasicDBObject("$lookup",new BasicDBObject("from","UserCollection")
-                  .append("localField", "_id")
-                  .append("foreignField", "projects.projectIndexId").append("as", "productObjects"));
-          DBObject unwind=new BasicDBObject("$unwind","$productObjects");
-          DBObject match2 = new BasicDBObject("$match", new BasicDBObject("productObjects._id", userId));
-          DBObject unwind2=new BasicDBObject("$unwind","$productObjects.projects");
-          DBObject match3 = new BasicDBObject("$match", new BasicDBObject("productObjects.projects.projectName",projectname));   
-          DBObject project=new BasicDBObject("$project",new BasicDBObject("productObjects.projects.projectRole",1)
-                .append("_id",0));
-          DBObject group=new BasicDBObject("$group",new BasicDBObject("_id","$productObjects.projects.projectRole"));
-          AggregationOutput output = coll.aggregate(match,lookup,unwind,match2,unwind2,match3,project,group);
+          DBCollection coll = db.getCollection("insa");
+          
+          DBObject match = new BasicDBObject("$match", new BasicDBObject("_id", projectId));
+          DBObject unwind=new BasicDBObject("$unwind","$"+entityName);
+          DBObject project=new BasicDBObject("$project",new BasicDBObject("instances","$"+entityName));
+          
+          AggregationOutput output = coll.aggregate(match,unwind,project);
+          if(output!=null)
+          {
+              System.out.println("Ajay worked");
+          }
+          else
+          {
+              System.out.println("ajay didnt not woek");
+          }
+             System.out.println("before if condition");
           for (DBObject result : output.results()) {
+              System.out.println("hai i reached here");
           System.out.println(result);
           finalOutput+=result;
           }
@@ -91,7 +96,7 @@ public class Fetchrole {
 			e.printStackTrace();
                 }		
         return Response.status(200).entity(finalOutput).build(); 
-	}
+        }
     /**
      * PUT method for updating or creating an instance of Fetchrole
      * @param content representation for the resource

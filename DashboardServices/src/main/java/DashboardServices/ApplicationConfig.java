@@ -29,7 +29,8 @@ public class ApplicationConfig extends Application {
      * If required, comment out calling this method in getClasses().
      */
     private void addRestResourceClasses(Set<Class<?>> resources) {
-	resources.add(DashboardServices.FetchProject.class);
+	resources.add(DashboardServices.FetchInstances.class);
+        resources.add(DashboardServices.FetchProject.class);
         resources.add(DashboardServices.Fetchrole.class);
         resources.add(DashboardServices.LoginService.class);
     }
